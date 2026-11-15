@@ -5,13 +5,13 @@ A single-player Tetris-style game built in Java, with game logic developed and t
 Eisenhower Matrix and MVP
 
 - Important & Urgent — Do (Version 1.0 MVP):
-  - A 10-column × 20-row board and five tetromino types: I, S, O, L, and Z.
-  - Left/right movement, clockwise rotation, and collision checks.
-  - Automatic downward movement and manual soft drop.
-  - Piece locking, complete-row clearing, and score tracking.
-  - Piece spawning, game-over detection, and restart.
+  - A 10-column × 20-row board and five tetromino types: I, S, O, L, and Z. "checked"
+  - Left/right movement, clockwise rotation, and collision checks. "doing now"
+  - Automatic downward movement and manual soft drop. "doing now"
+  - Piece locking, complete-row clearing, and score tracking. "doing now"
+  - Piece spawning, game-over detection, and restart. "doing now"
   - A desktop GUI displaying the board, score, and game state, with keyboard controls.
-  - Pause/resume so the player can stop and continue a session.
+  - Pause/resume so the player can stop and continue a session. "doing now"
 
 - Important & Not Urgent — Schedule (Version 2.0+):
   - A next-piece preview.
@@ -51,7 +51,7 @@ Exact version 1.0 behavior
 
 MVP 
 
-Version 1.0 is complete when a player can launch the desktop application, move and rotate falling pieces, clear rows, see the correct score, pause/resume, reach game over, and restart without relaunching. 
+Currently finished building up Board && Piece && Tetromino, now focusing on establishing game engine.
 
 Tech stack
 
