@@ -113,6 +113,33 @@ public class GameEngine {
         }
     }
 
+    public boolean rotateClockwise() {
+        if (state != GameState.RUNNING) {
+            return false;
+        }
+        if (!board.canPlace(activePiece.getNextRotationCells(),
+                activePiece.getRow(), activePiece.getColumn())) {
+            return false;
+        }
+        activePiece.rotateClockwise();
+        return true;
+    }
+
+public void tick() {
+        if (state != GameState.RUNNING) {
+            return;
+        }
+        if (!tryMove(1, 0)) {
+            lockPiece();
+        }
+    }
+
+    
+    public void softDrop() {
+        tick();
+    }
+
+
     public void restart() {
         board.clear();
         score = 0;
