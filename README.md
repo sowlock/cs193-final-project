@@ -8,10 +8,10 @@ Eisenhower Matrix and MVP
   - A 10-column × 20-row board and five tetromino types: I, S, O, L, and Z. "checked"
   - Left/right movement, clockwise rotation, and collision checks. "checked"
   - Automatic downward movement and manual soft drop. "checked"
-  - Piece locking, complete-row clearing, and score tracking. "doing now"
-  - Piece spawning, game-over detection, and restart. "doing now"
-  - A desktop GUI displaying the board, score, and game state, with keyboard controls.
-  - Pause/resume so the player can stop and continue a session. "doing now"
+  - Piece locking, complete-row clearing, and score tracking. "checked"
+  - Piece spawning, game-over detection, and restart. "checked"
+  - A desktop GUI displaying the board, score, and game state, with keyboard controls. "doing noe"
+  - Pause/resume so the player can stop and continue a session. "checked"
 
 - Important & Not Urgent — Schedule (Version 2.0+):
   - A next-piece preview.
@@ -51,7 +51,7 @@ Exact version 1.0 behavior
 
 MVP 
 
-Finish building basic game engine, contating several methods relating to block spawning, falling, moving, locking, and rotating. Also three game state: running, paused, game over. Now focusing on building main console.
+Finish building basic game console, now adding the last method, printboard.
 
 Tech stack
 
