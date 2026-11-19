@@ -45,4 +45,50 @@ public class ConsoleMain {
         System.out.println("Thanks for playing!");
     }
 
+
+    private static void printBoard(GameEngine game) {
+        char[][] display = new char[Board.ROWS][Board.COLUMNS];
+        for (int row = 0; row < Board.ROWS; row++) {
+            for (int column = 0; column < Board.COLUMNS; column++) {
+                display[row][column] = game.getBoardCell(row, column);
+            }
+        }
+
+        Piece piece = game.getActivePiece();
+        if (piece != null) {
+            int[][] cells = piece.getCells();
+            for (int i = 0; i < cells.length; i++) {
+                int row = piece.getRow() + cells[i][0];
+                int column = piece.getColumn() + cells[i][1];
+                display[row][column] = '@';
+            }
+        }
+
+        System.out.println();
+        System.out.println("Score: " + game.getScore() + " | State: " + game.getState());
+        printBorder();
+        for (int row = 0; row < Board.ROWS; row++) {
+            System.out.print("|");
+            for (int column = 0; column < Board.COLUMNS; column++) {
+                System.out.print(display[row][column]);
+            }
+            System.out.println("|");
+        }
+        printBorder();
+
+        if (game.getState() == GameState.PAUSED) {
+            System.out.println("Paused. Enter P to resume, R to restart, or Q to quit.");
+        } else if (game.getState() == GameState.GAME_OVER) {
+            System.out.println("Game over! Enter R to restart or Q to quit.");
+        }
+    }
+
+    private static void printBorder() {
+        System.out.print("+");
+        for (int column = 0; column < Board.COLUMNS; column++) {
+            System.out.print("-");
+        }
+        System.out.println("+");
+    }
+
 }
