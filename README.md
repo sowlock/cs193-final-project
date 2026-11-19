@@ -10,7 +10,7 @@ Eisenhower Matrix and MVP
   - Automatic downward movement and manual soft drop. "checked"
   - Piece locking, complete-row clearing, and score tracking. "checked"
   - Piece spawning, game-over detection, and restart. "checked"
-  - A desktop GUI displaying the board, score, and game state, with keyboard controls. "doing noe"
+  - A desktop GUI displaying the board, score, and game state, with keyboard controls. "checked"
   - Pause/resume so the player can stop and continue a session. "checked"
 
 - Important & Not Urgent — Schedule (Version 2.0+):
