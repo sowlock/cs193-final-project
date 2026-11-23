@@ -13,6 +13,8 @@ Eisenhower Matrix and MVP
   - A desktop GUI displaying the board, score, and game state, with keyboard controls. "checked"
   - Pause/resume so the player can stop and continue a session. "checked"
 
+Now working on the GUI part, moving to 2.0 version.
+
 - Important & Not Urgent — Schedule (Version 2.0+):
   - A next-piece preview.
   - Saved local high scores.
