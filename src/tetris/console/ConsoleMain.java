@@ -2,6 +2,8 @@ package tetris.console;
 
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 import tetris.engine.GameEngine;
 import tetris.engine.GameState;
 import tetris.model.Board;
@@ -9,6 +11,7 @@ import tetris.model.Piece;
 
 
 public class ConsoleMain {
+    private static final long FALL_INTERVAL_MS = 500;
     public static void main(String[] args) {
         GameEngine game = new GameEngine();
         System.out.println("Java Tetris - Console Edition");
@@ -16,30 +19,54 @@ public class ConsoleMain {
         System.out.println("A: left | D: right | W: rotate | S or Enter: down");
         System.out.println("P: pause/resume | R: restart | Q: quit");
         System.out.println("@: falling piece | letters: landed blocks | .: empty");
-        System.out.println("Pieces fall only when you enter S or press Enter.");
+        System.out.println("Pieces fall automatically every 0.5 seconds.");
+
+        
+        Timer gravity = new Timer("tetris-gravity", true);
+        boolean[] playing = {true};
+        printBoard(game);
+        System.out.print("Command: ");
+        gravity.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                synchronized (game) {
+                    if (playing[0] && game.getState() == GameState.RUNNING) {
+                        game.tick();
+                        printBoard(game);
+                        System.out.print("Command: ");
+                    }
+                }
+            }
+        }, FALL_INTERVAL_MS, FALL_INTERVAL_MS);
 
         try (Scanner input = new Scanner(System.in)) {
-            boolean playing = true;
-            while (playing) {
-                printBoard(game); //print play board
-                System.out.print("Command: ");
-                if (!input.hasNextLine()) {
-                    break;
-                }
+            while (input.hasNextLine()) {
                 String command = input.nextLine().trim().toLowerCase(Locale.ROOT);
-                switch (command) {
-                    case "a": game.moveLeft(); break;
-                    case "d": game.moveRight(); break;
-                    case "w": game.rotateClockwise(); break;
-                    case "s": game.softDrop(); break;
-                    case "": game.tick(); break;
-                    case "p": game.togglePause(); break;
-                    case "r": game.restart(); break;
-                    case "q": playing = false; break;
-                    default:
-                        System.out.println("Unknown command. Use A, D, W, S, P, R, Q, or Enter.");
+                synchronized (game) {
+                    switch (command) {
+                        case "a": game.moveLeft(); break;
+                        case "d": game.moveRight(); break;
+                        case "w": game.rotateClockwise(); break;
+                        case "s": game.softDrop(); break;
+                        case "": game.tick(); break;
+                        case "p": game.togglePause(); break;
+                        case "r": game.restart(); break;
+                        case "q": playing[0] = false; break;
+                        default:
+                            System.out.println("Unknown command. Use A, D, W, S, P, R, Q, or Enter.");
+                            break;
+                    }
+                    if (!playing[0]) {
                         break;
+                    }
+                    printBoard(game);
+                    System.out.print("Command: ");
                 }
+            }
+        } finally {
+            synchronized (game) {
+                playing[0] = false;
+                gravity.cancel();
             }
         }
         System.out.println("Thanks for playing!");
