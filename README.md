@@ -13,7 +13,7 @@ Eisenhower Matrix and MVP
   - A desktop GUI displaying the board, score, and game state, with keyboard controls. "checked"
   - Pause/resume so the player can stop and continue a session. "checked"
 
-Now working on the GUI part, moving to 2.0 version.
+2.0: finished building game panel, now building game frame and final main method.
 
 - Important & Not Urgent — Schedule (Version 2.0+):
   - A next-piece preview.
@@ -51,9 +51,13 @@ Exact version 1.0 behavior
 - GUI: Show the board, score, controls, and a clear paused/game-over message. Provide a restart button and keyboard shortcuts: arrows for movement/rotation, P for pause/resume, and R for restart.
 - Scope: One player, offline, one session at a time. No accounts, external assets, APIs, or persistent storage are required.
 
+Game 2.0 Behavior:
+- GUI: using Swing to build GUI for current game based on the game engine that was already completed.
+- visual: Using different color for different block. A rectangal interface with Scoring & instruction % paused button & restart button on the right side, and tetris gaming on the left.
+
 MVP 
 
-Finish building basic game console, now adding the last method, printboard.
+2.0: Finish building game panel, now building game frame and Main method for GUI.
 
 Tech stack
 
