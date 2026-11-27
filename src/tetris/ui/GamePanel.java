@@ -27,6 +27,55 @@ public class GamePanel extends JPanel {
         setBackground(BOARD_COLOR);
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        int size = Math.min(getWidth() / Board.COLUMNS, getHeight() / Board.ROWS);
+        if (size < 1) {
+            return;
+        }
+        int width = size * Board.COLUMNS;
+        int height = size * Board.ROWS;
+        int left = (getWidth() - width) / 2;
+        int top = (getHeight() - height) / 2;
+
+        for (int row = 0; row < Board.ROWS; row++) {
+            for (int column = 0;column < Board.COLUMNS; column++) {
+                char symbol = game.getBoardCell(row, column);
+                if (symbol != Board.EMPTY) {
+                    drawBlock(g, left + column * size, top + row * size, size, symbol);
+                }
+            }
+        }
+
+        Piece piece = game.getActivePiece();
+        if (piece != null) {
+            int[][] cells = piece.getCells();
+            for (int i = 0; i < cells.length; i++) {
+                int row = piece.getRow() + cells[i][0];
+                int column = piece.getColumn() + cells[i][1];
+                drawBlock(g, left + column * size, top + row * size,
+                        size, piece.getSymbol());
+            }
+        }
+
+        g.setColor(GRID_COLOR);
+        for (int row = 0; row < Board.ROWS; row++) {
+            g.drawLine(left, top + row * size, left + width - 1, top + row * size);
+        }
+        for (int column = 0; column < Board.COLUMNS; column++) {
+            g.drawLine(left + column * size, top, left + column * size, top + height - 1);
+        }
+        g.drawRect(left, top, width - 1, height - 1);
+
+        if (game.getState() == GameState.PAUSED) {
+            drawMessage(g, left, top, width, height, "Paused");
+        } else if (game.getState() == GameState.GAME_OVER) {
+            drawMessage(g, left, top, width, height, "Game Over");
+        }
+    }
+
     private void drawBlock(Graphics g, int x, int y, int size, char symbol) {
         switch (symbol) {
             case 'I': g.setColor(new Color(55, 200, 220)); break;
